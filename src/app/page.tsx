@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { Check, Star } from "lucide-react";
 
 // components
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
@@ -70,6 +70,19 @@ export default function Home() {
                     src="/users/user-5.jpg"
                     alt="user image"
                   />
+                </div>
+                <div>
+                  <div className="flex gap-0.5">
+                    <Star className="h-4 w-4 text-green-600 fill-green-600" />
+                    <Star className="h-4 w-4 text-green-600 fill-green-600" />
+                    <Star className="h-4 w-4 text-green-600 fill-green-600" />
+                    <Star className="h-4 w-4 text-green-600 fill-green-600" />
+                    <Star className="h-4 w-4 text-green-600 fill-green-600" />
+                  </div>
+
+                  <p>
+                    <span className="font-semibold">1.250</span> happy customers
+                  </p>
                 </div>
               </div>
             </div>
