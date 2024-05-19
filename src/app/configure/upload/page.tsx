@@ -1,10 +1,17 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { Loader2, MousePointerSquareDashed } from "lucide-react";
 import { useState } from "react";
+import Dropzone, { FileRejection } from "react-dropzone";
 
 const Page = () => {
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
+
+  const onDropRejected = (rejectedFiles: FileRejection[]) => {};
+  const onDropAccepted = (rejectedFiles: FileRejection[]) => {
+    console.log("accepted");
+  };
   return (
     <div
       className={cn(
@@ -14,7 +21,29 @@ const Page = () => {
         }
       )}
     >
-      <div className="relative flex flex-1 flex-col items-center justify-center w-full"></div>
+      <div className="relative flex flex-1 flex-col items-center justify-center w-full">
+        <Dropzone
+          onDropRejected={onDropRejected}
+          onDropAccepted={onDropAccepted}
+          accept={{
+            "image/png": [".png"],
+            "image/jpeg": [".jpeg"],
+            "image/jpg": [".jpg"],
+          }}
+          onDragEnter={() => setIsDragOver(true)}
+          onDragLeave={() => setIsDragOver(false)}
+        >
+          {({ getRootProps, getInputProps }) => (
+            <div
+              className="h-full w-full flex-1 flex flex-col items-center justify-center"
+              {...getRootProps()}
+            >
+              <input {...getInputProps()} />
+              asf
+            </div>
+          )}
+        </Dropzone>
+      </div>
     </div>
   );
 };
