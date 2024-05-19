@@ -13,9 +13,27 @@ const PHONES = [
   "/testimonials/6.jpg",
 ];
 
+function splitArray<T>(array: Array<T>, numParts: number) {
+  const result: Array<Array<T>> = [];
+
+  for (let i = 0; i < array.length; i++) {
+    const index = i % numParts;
+    if (!result[index]) {
+      result[index] = [];
+    }
+    result[index].push(array[i]);
+  }
+
+  return result;
+}
+
 function ReviewGrid() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.4 });
+  const columns = splitArray(PHONES, 3);
+  const column1 = columns[0];
+  const column2 = columns[1];
+  const column3 = splitArray(columns[2], 2);
 
   return (
     <div
