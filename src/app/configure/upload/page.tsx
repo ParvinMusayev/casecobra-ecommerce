@@ -39,7 +39,6 @@ const Page = () => {
               {...getRootProps()}
             >
               <input {...getInputProps()} />
-              asf
             </div>
           )}
         </Dropzone>
