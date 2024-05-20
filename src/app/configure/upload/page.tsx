@@ -8,6 +8,7 @@ import Dropzone, { FileRejection } from "react-dropzone";
 
 const Page = () => {
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
 
   const onDropRejected = (rejectedFiles: FileRejection[]) => {};
   const onDropAccepted = (rejectedFiles: FileRejection[]) => {
@@ -55,7 +56,10 @@ const Page = () => {
                 {isUploading ? (
                   <div className="flex flex-col items-center">
                     <p>Uploading...</p>
-                    <Progress className="mt-2 w-40 h-2 bg-gray-300" />
+                    <Progress
+                      value={uploadProgress}
+                      className="mt-2 w-40 h-2 bg-gray-300"
+                    />
                   </div>
                 ) : isPending ? (
                   <div className="flex flex-col items-center">
@@ -72,6 +76,10 @@ const Page = () => {
                   </p>
                 )}
               </div>
+
+              {isPending ? null : (
+                <p className="text-xs text-zinc-500">PNG, JPG, JPEG</p>
+              )}
             </div>
           )}
         </Dropzone>
