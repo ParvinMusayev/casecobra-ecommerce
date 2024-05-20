@@ -1,5 +1,6 @@
 "use client";
 
+import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 import { Image, Loader2, MousePointerSquareDashed } from "lucide-react";
 import { useState, useTransition } from "react";
@@ -54,6 +55,7 @@ const Page = () => {
                 {isUploading ? (
                   <div className="flex flex-col items-center">
                     <p>Uploading...</p>
+                    <Progress className="mt-2 w-40 h-2 bg-gray-300" />
                   </div>
                 ) : isPending ? (
                   <div className="flex flex-col items-center">
