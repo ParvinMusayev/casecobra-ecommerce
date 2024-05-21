@@ -13,7 +13,7 @@ const Page = () => {
   const [uploadProgress, setUploadProgress] = useState<number>(0);
   const router = useRouter();
 
-  const {} = useUploadThing("imageUploader", {
+  const { startUpload } = useUploadThing("imageUploader", {
     onClientUploadComplete: ([data]) => {
       const configId = data.serverData.configId;
       startTransition(() => {
@@ -25,9 +25,16 @@ const Page = () => {
     },
   });
 
-  const onDropRejected = (rejectedFiles: FileRejection[]) => {};
-  const onDropAccepted = (rejectedFiles: FileRejection[]) => {
-    console.log("accepted");
+  const onDropRejected = (rejectedFiles: FileRejection[]) => {
+    const [file] = rejectedFiles;
+
+    setIsDragOver(false);
+  };
+
+  const onDropAccepted = (acceptedFiles: File[]) => {
+    startUpload(acceptedFiles, { configId: undefined });
+
+    setIsDragOver(false);
   };
 
   const isUploading = false;
