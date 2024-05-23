@@ -9,7 +9,7 @@ const DesignConfigurator = ({
   imageUrl,
   imageDimensions,
 }: DesignConfiguratorProps) => {
-  return <p></p>;
+  return [];
 };
 
 export default DesignConfigurator;
