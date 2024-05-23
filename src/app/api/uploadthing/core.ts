@@ -1,5 +1,6 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { z } from "zod";
+import sharp from "sharp";
 
 const f = createUploadthing();
 
@@ -11,6 +12,11 @@ export const ourFileRouter = {
     })
     .onUploadComplete(async ({ metadata, file }) => {
       const { configId } = metadata.input;
+
+      const res = await fetch(file.url);
+      const buffer = await res.arrayBuffer();
+      const imgMetadata = await sharp(buffer).metadata();
+      const { width, height } = imgMetadata;
 
       return { configId };
     }),
