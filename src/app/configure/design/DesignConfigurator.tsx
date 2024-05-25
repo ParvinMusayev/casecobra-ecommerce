@@ -48,6 +48,7 @@ const DesignConfigurator = ({
             height: imageDimensions.height / 4,
             width: imageDimensions.width / 4,
           }}
+          className="absolute z-20 border-[3px] border-primary"
           lockAspectRatio
           resizeHandleComponent={{
             bottomRight: <HandleComponent />,
