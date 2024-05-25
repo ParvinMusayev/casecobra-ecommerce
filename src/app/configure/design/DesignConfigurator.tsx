@@ -8,8 +8,16 @@ import HandleComponent from "@/components/HandleComponent";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { RadioGroup } from "@headlessui/react";
 import { useState } from "react";
-import { COLORS } from "@/validators/option-validator";
+import { COLORS, MODELS } from "@/validators/option-validator";
 import { Label } from "@/components/ui/label";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { ChevronsUpDown } from "lucide-react";
 
 interface DesignConfiguratorProps {
   configId: string;
@@ -24,8 +32,10 @@ const DesignConfigurator = ({
 }: DesignConfiguratorProps) => {
   const [options, setOptions] = useState<{
     color: (typeof COLORS)[number];
+    model: (typeof MODELS.options)[number];
   }>({
     color: COLORS[0],
+    model: MODELS.options[0],
   });
 
   return (
@@ -130,6 +140,18 @@ const DesignConfigurator = ({
 
                 <div className="relative flex flex-col gap-3 w-full">
                   <Label>Model</Label>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        variant="outline"
+                        role="combobox"
+                        className="w-full justify-between"
+                      >
+                        {options.model.label}
+                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                  </DropdownMenu>
                 </div>
               </div>
             </div>
