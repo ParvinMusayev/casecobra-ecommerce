@@ -1,7 +1,7 @@
 "use client";
 
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { cn } from "@/lib/utils";
+import { cn, formatPrice } from "@/lib/utils";
 import { Rnd } from "react-rnd";
 import NextImage from "next/image";
 import HandleComponent from "@/components/HandleComponent";
@@ -213,7 +213,36 @@ const DesignConfigurator = ({
                                 }
                               )
                             }
-                          ></RadioGroup.Option>
+                          >
+                            <span className="flex items-center">
+                              <span className="flex flex-col text-sm">
+                                <RadioGroup.Label
+                                  className="font-medium text-gray-900"
+                                  as="span"
+                                >
+                                  {option.label}
+                                </RadioGroup.Label>
+                                {option.description ? (
+                                  <RadioGroup.Description
+                                    as="span"
+                                    className="text-gray-500"
+                                  >
+                                    <span className="block sm:inline">
+                                      {option.description}
+                                    </span>
+                                  </RadioGroup.Description>
+                                ) : null}
+                              </span>
+                            </span>
+                            <RadioGroup.Description
+                              as="span"
+                              className="mt-2 flex text-sm sm:ml-4 sm:mt-0 sm:flex-col sm:text-right"
+                            >
+                              <span className="font-medium text-gray-900">
+                                {formatPrice(option.price / 100)}
+                              </span>
+                            </RadioGroup.Description>
+                          </RadioGroup.Option>
                         ))}
                       </div>
                     </RadioGroup>
