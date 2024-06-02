@@ -22,7 +22,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Check, ChevronsUpDown } from "lucide-react";
+import { ArrowRight, Check, ChevronsUpDown } from "lucide-react";
 import { BASE_PRICE } from "@/config/products";
 
 interface DesignConfiguratorProps {
@@ -39,9 +39,23 @@ const DesignConfigurator = ({
   const [options, setOptions] = useState<{
     color: (typeof COLORS)[number];
     model: (typeof MODELS.options)[number];
+    material: (typeof MATERIALS.options)[number];
+    finish: (typeof FINISHES.options)[number];
   }>({
     color: COLORS[0],
     model: MODELS.options[0],
+    material: MATERIALS.options[0],
+    finish: FINISHES.options[0],
+  });
+
+  const [renderedDimension, setRenderedDimension] = useState({
+    width: imageDimensions.width / 4,
+    height: imageDimensions.height / 4,
+  });
+
+  const [renderedPosition, setRenderedPosition] = useState({
+    x: 150,
+    y: 205,
   });
 
   return (
@@ -258,7 +272,16 @@ const DesignConfigurator = ({
           <div className="h-px w-full bg-zinc-200" />
           <div className="w-full h-full flex justify-end items-center">
             <div className="w-full flex gap-6 items-center">
-              <p className="font-medium whitespace-nowrap"></p>
+              <p className="font-medium whitespace-nowrap">
+                {formatPrice(
+                  (BASE_PRICE + options.finish.price + options.material.price) /
+                    100
+                )}
+              </p>
+              <Button size="sm" className="w-full">
+                Continue
+                <ArrowRight className="h-4 w-4 ml-1.5 inline" />
+              </Button>
             </div>
           </div>
         </div>
