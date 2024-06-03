@@ -44,5 +44,10 @@ model Configuration {
   width           Int
   height          Int
   imageUrl        String
+  color           CaseColor?
+  model           PhoneModel?
+  material        CaseMaterial?
+  finish          CaseFinish?
   croppedImageUrl String?
+ 
 }
