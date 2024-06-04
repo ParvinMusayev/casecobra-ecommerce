@@ -1,9 +1,11 @@
 "use client";
 
 import Phone from "@/components/Phone";
+import { BASE_PRICE, PRODUCT_PRICES } from "@/config/products";
 import { cn } from "@/lib/utils";
-import { COLORS } from "@/validators/option-validator";
+import { COLORS, MODELS } from "@/validators/option-validator";
 import { Configuration } from "@prisma/client";
+import { Check } from "lucide-react";
 import { useEffect, useState } from "react";
 import Confetti from "react-dom-confetti";
 
@@ -16,6 +18,16 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
   const tw = COLORS.find(
     (supportedColor) => supportedColor.value === color
   )?.tw;
+
+  const { label: modelLabel } = MODELS.options.find(
+    ({ value }) => value === model
+  )!;
+
+  let totalPrice = BASE_PRICE;
+  if (material === "polycarbonate")
+    totalPrice += PRODUCT_PRICES.material.polycarbonate;
+  if (finish === "textured") totalPrice += PRODUCT_PRICES.finish.textured;
+
   return (
     <>
       <div
@@ -34,6 +46,16 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
             className={cn(`bg-${tw}`, "max-w-[150px] md:max-w-full")}
             imgSrc={configuration.croppedImageUrl!}
           />
+        </div>
+
+        <div className="mt-6 sm:col-span-9 md:row-end-1">
+          <h3 className="text-3xl font-bold tracking-tight text-gray-900">
+            Your {modelLabel} Case
+          </h3>
+          <div className="mt-3 flex items-center gap-1.5 text-base">
+            <Check className="h-4 w-4 text-green-500" />
+            In stock and ready to ship
+          </div>
         </div>
       </div>
     </>
