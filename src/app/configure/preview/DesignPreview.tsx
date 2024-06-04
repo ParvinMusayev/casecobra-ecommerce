@@ -1,11 +1,12 @@
 "use client";
 
 import Phone from "@/components/Phone";
+import { Button } from "@/components/ui/button";
 import { BASE_PRICE, PRODUCT_PRICES } from "@/config/products";
 import { cn, formatPrice } from "@/lib/utils";
 import { COLORS, MODELS } from "@/validators/option-validator";
 import { Configuration } from "@prisma/client";
-import { Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { useEffect, useState } from "react";
 import Confetti from "react-dom-confetti";
 
@@ -97,7 +98,31 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
                     </p>
                   </div>
                 ) : null}
+
+                {material === "polycarbonate" ? (
+                  <div className="flex items-center justify-between py-1 mt-2">
+                    <p className="text-gray-600">Soft polycarbonate material</p>
+                    <p className="font-medium text-gray-900">
+                      {formatPrice(PRODUCT_PRICES.material.polycarbonate / 100)}
+                    </p>
+                  </div>
+                ) : null}
+
+                <div className="my-2 h-px bg-gray-200" />
+
+                <div className="flex items-center justify-between py-2">
+                  <p className="font-semibold text-gray-900">Order total</p>
+                  <p className="font-semibold text-gray-900">
+                    {formatPrice(totalPrice / 100)}
+                  </p>
+                </div>
               </div>
+            </div>
+
+            <div className="mt-8 flex justify-end pb-12">
+              <Button className="px-4 sm:px-6 lg:px-8">
+                Check out <ArrowRight className="h-4 w-4 ml-1.5 inline" />
+              </Button>
             </div>
           </div>
         </div>
