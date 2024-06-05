@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -49,7 +48,7 @@ model Configuration {
   material        CaseMaterial?
   finish          CaseFinish?
   croppedImageUrl String?
- 
+  Order           Order[]
 }
 
 model User {
@@ -78,4 +77,28 @@ model Order {
 
   createdAt DateTime @default(now())
   updated   DateTime @updatedAt
+}
+
+model ShippingAddress {
+  id          String  @id @default(cuid())
+  name        String
+  street      String
+  city        String
+  postalCode  String
+  country     String
+  state       String?
+  phoneNumber String?
+  orders      Order[]
+}
+
+model BillingAddress {
+  id          String  @id @default(cuid())
+  name        String
+  street      String
+  city        String
+  postalCode  String
+  country     String
+  state       String?
+  phoneNumber String?
+  orders      Order[]
 }
