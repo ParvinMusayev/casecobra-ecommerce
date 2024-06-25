@@ -21,6 +21,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
 
   const { id } = configuration;
   const { user } = useKindeBrowserClient();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
 
   const [showConfetti, setShowConfetti] = useState<boolean>(false);
   useEffect(() => setShowConfetti(true));
@@ -63,6 +64,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
     } else {
       // need to log in
       localStorage.setItem("configurationId", id);
+      setIsLoginModalOpen(true);
     }
   };
 
