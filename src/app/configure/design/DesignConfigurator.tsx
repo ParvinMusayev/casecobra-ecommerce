@@ -1,11 +1,11 @@
 "use client";
 
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { cn, formatPrice } from "@/lib/utils";
-import { Rnd } from "react-rnd";
-import NextImage from "next/image";
 import HandleComponent from "@/components/HandleComponent";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { cn, formatPrice } from "@/lib/utils";
+import NextImage from "next/image";
+import { Rnd } from "react-rnd";
 import { RadioGroup } from "@headlessui/react";
 import { useRef, useState } from "react";
 import {
@@ -27,7 +27,6 @@ import { BASE_PRICE } from "@/config/products";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useToast } from "@/components/ui/use-toast";
 import { useMutation } from "@tanstack/react-query";
-
 import { saveConfig as _saveConfig, SaveConfigArgs } from "./actions";
 import { useRouter } from "next/navigation";
 
@@ -160,9 +159,9 @@ const DesignConfigurator = ({
       >
         <div className="relative w-60 bg-opacity-50 pointer-events-none aspect-[896/1831]">
           <AspectRatio
-            ratio={896 / 1831}
             ref={phoneCaseRef}
-            className="className='pointer-events-none relative z-50 aspect-[896/1831] w-full'>"
+            ratio={896 / 1831}
+            className="pointer-events-none relative z-50 aspect-[896/1831] w-full"
           >
             <NextImage
               fill
@@ -175,7 +174,7 @@ const DesignConfigurator = ({
           <div
             className={cn(
               "absolute inset-0 left-[3px] top-px right-[3px] bottom-px rounded-[32px]",
-              `bg-blue-950`
+              `bg-${options.color.tw}`
             )}
           />
         </div>
@@ -225,12 +224,14 @@ const DesignConfigurator = ({
             aria-hidden="true"
             className="absolute z-10 inset-x-0 bottom-0 h-12 bg-gradient-to-t from-white pointer-events-none"
           />
+
           <div className="px-8 pb-12 pt-8">
             <h2 className="tracking-tight font-bold text-3xl">
               Customize your case
             </h2>
 
             <div className="w-full h-px bg-zinc-200 my-6" />
+
             <div className="relative mt-4 h-full flex flex-col justify-between">
               <div className="flex flex-col gap-6">
                 <RadioGroup
@@ -310,6 +311,7 @@ const DesignConfigurator = ({
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
+
                 {[MATERIALS, FINISHES].map(
                   ({ name, options: selectableOptions }) => (
                     <RadioGroup
@@ -347,6 +349,7 @@ const DesignConfigurator = ({
                                 >
                                   {option.label}
                                 </RadioGroup.Label>
+
                                 {option.description ? (
                                   <RadioGroup.Description
                                     as="span"
@@ -359,6 +362,7 @@ const DesignConfigurator = ({
                                 ) : null}
                               </span>
                             </span>
+
                             <RadioGroup.Description
                               as="span"
                               className="mt-2 flex text-sm sm:ml-4 sm:mt-0 sm:flex-col sm:text-right"
@@ -389,6 +393,9 @@ const DesignConfigurator = ({
                 )}
               </p>
               <Button
+                isLoading={isPending}
+                disabled={isPending}
+                loadingText="Saving"
                 onClick={() =>
                   saveConfig({
                     configId,
