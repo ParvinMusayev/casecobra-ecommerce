@@ -2,6 +2,17 @@ import { db } from "@/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { notFound } from "next/navigation";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { formatPrice } from "@/lib/utils";
+import { Progress } from "@/components/ui/progress";
+
 const Page = async () => {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
@@ -59,7 +70,26 @@ const Page = async () => {
     <div className="flex min-h-screen w-full bg-muted/40">
       <div className="max-w-7xl w-full mx-auto flex flex-col sm:gap-4 sm:py-4">
         <div className="flex flex-col gap-16">
-          <div className="grid gap-4 sm:grid-cols-2"></div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <Card>
+              <CardHeader className="pb-2">
+                <CardDescription>Last Week</CardDescription>
+                <CardTitle className="text-4xl">
+                  {formatPrice(lastWeekSum._sum.amount ?? 0)}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-sm text-muted-foreground">
+                  of {formatPrice(WEEKLY_GOAL)} goal
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Progress
+                  value={((lastWeekSum._sum.amount ?? 0) * 100) / WEEKLY_GOAL}
+                />
+              </CardFooter>
+            </Card>
+          </div>
         </div>
       </div>
     </div>
