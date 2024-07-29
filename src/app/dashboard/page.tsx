@@ -57,7 +57,11 @@ const Page = async () => {
 
   return (
     <div className="flex min-h-screen w-full bg-muted/40">
-      secret dashboard page
+      <div className="max-w-7xl w-full mx-auto flex flex-col sm:gap-4 sm:py-4">
+        <div className="flex flex-col gap-16">
+          <div className="grid gap-4 sm:grid-cols-2"></div>
+        </div>
+      </div>
     </div>
   );
 };
