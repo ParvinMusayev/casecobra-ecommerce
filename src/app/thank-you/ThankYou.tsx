@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getPaymentStatus } from "./actions";
 import { useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
+import PhonePreview from "@/components/PhonePreview";
 
 const ThankYou = () => {
   const searchParams = useSearchParams();
@@ -75,6 +76,42 @@ const ThankYou = () => {
           </div>
         </div>
         {/*  */}
+        <div className="flex space-x-6 overflow-hidden mt-4 rounded-xl bg-gray-900/5 ring-1 ring-inset ring-gray-900/10 lg:rounded-2xl">
+          <PhonePreview
+            croppedImageUrl={configuration.croppedImageUrl!}
+            color={color!}
+          />
+        </div>
+
+        <div>
+          <div className="grid grid-cols-2 gap-x-6 py-10 text-sm">
+            <div>
+              <p className="font-medium text-gray-900">Shipping address</p>
+              <div className="mt-2 text-zinc-700">
+                <address className="not-italic">
+                  <span className="block">{shippingAddress?.name}</span>
+                  <span className="block">{shippingAddress?.street}</span>
+                  <span className="block">
+                    {shippingAddress?.postalCode} {shippingAddress?.city}
+                  </span>
+                </address>
+              </div>
+            </div>
+            <div>
+              <p className="font-medium text-gray-900">Billing address</p>
+              <div className="mt-2 text-zinc-700">
+                <address className="not-italic">
+                  <span className="block">{billingAddress?.name}</span>
+                  <span className="block">{billingAddress?.street}</span>
+                  <span className="block">
+                    {billingAddress?.postalCode} {billingAddress?.city}
+                  </span>
+                </address>
+              </div>
+            </div>
+          </div>
+          {/*  */}
+        </div>
       </div>
     </div>
   );
