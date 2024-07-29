@@ -89,6 +89,28 @@ const Page = async () => {
                 />
               </CardFooter>
             </Card>
+            <Card>
+              <CardHeader className="pb-2">
+                <CardDescription>Last Month</CardDescription>
+                <CardTitle className="text-4xl">
+                  {formatPrice(lastMonthSum._sum.amount ?? 0)}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-sm text-muted-foreground">
+                  of {formatPrice(MONTHLY_GOAL)} goal
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Progress
+                  value={((lastMonthSum._sum.amount ?? 0) * 100) / MONTHLY_GOAL}
+                />
+              </CardFooter>
+            </Card>
+
+            <h1 className="text-4xl font-bold tracking-tight">
+              Incoming orders
+            </h1>
           </div>
         </div>
       </div>
